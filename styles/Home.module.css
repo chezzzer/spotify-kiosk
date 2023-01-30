@@ -1,0 +1,39 @@
+.search input {
+  width: 100%;
+  background: rgba(255,255,255,.5);
+  border:0;
+  outline:0;
+  padding: .75rem;
+  border-radius: 2.5px;
+  color: #fff;
+  font-size: 1.5em;
+}
+
+.track {
+  display: flex;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.track:hover {
+  background: rgba(255,255,255,.25)
+}
+
+.track .image {
+  height: 75px;
+  width: 75px;
+  margin: auto 0;
+}
+
+.track .info {
+  width: 100%;
+  margin: auto 1rem;
+}
+
+.track .info > h3 {
+  margin-bottom: .5rem;
+}
+
+.track .add {
+  margin: auto 0;
+}
