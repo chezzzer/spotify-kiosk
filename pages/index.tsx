@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
-import { KeyboardEventHandler, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { Track } from "spotify-types";
 
@@ -40,6 +40,14 @@ export default function Home() {
     const queueSong = async (event: any) => {
         const e = event.currentTarget as HTMLLinkElement;
 
+        if (
+            e.classList.contains(styles.queueing) ||
+            e.classList.contains(styles.success)
+        )
+            return;
+
+        e.classList.add(styles.queueing);
+
         try {
             await fetch("/api/queue", {
                 method: "POST",
@@ -50,9 +58,11 @@ export default function Home() {
             });
         } catch (_) {
             console.log("error");
-            e.classList.add("error");
+            e.classList.remove(styles.queueing);
+            e.classList.add(styles.error);
         }
-        e.classList.add("success");
+        e.classList.remove(styles.queueing);
+        e.classList.add(styles.success);
     };
 
     return (
@@ -70,17 +80,20 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className={styles.main}>
-                <form
-                    className={styles.search}
-                    onSubmit={(e) => e.preventDefault()}
-                >
-                    <input
-                        onInput={handleSearch}
-                        type="text"
-                        name="search"
-                        placeholder="Search for a song..."
-                    />
-                </form>
+                <div className={styles.bar}>
+                    <form
+                        className={styles.search}
+                        onSubmit={(e) => e.preventDefault()}
+                    >
+                        <input
+                            onInput={handleSearch}
+                            type="text"
+                            name="search"
+                            placeholder="Search for a song..."
+                        />
+                    </form>
+                    <div className={styles.playing}></div>
+                </div>
                 <div className={styles.results}>
                     {results.map((result: Track) => {
                         return (
@@ -95,7 +108,7 @@ export default function Home() {
                                         alt={result.name}
                                         width={75}
                                         height={75}
-                                        src={result.album.images[0].url}
+                                        src={result.album.images[1].url}
                                     />
                                 </div>
                                 <div className={styles.info}>
@@ -106,7 +119,7 @@ export default function Home() {
                                             .join(", ")}
                                     </h5>
                                 </div>
-                                <div className={styles.add}>add</div>
+                                <div className={styles.add}></div>
                             </div>
                         );
                     })}

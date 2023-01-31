@@ -1,39 +1,101 @@
-.search input {
-  width: 100%;
-  background: rgba(255,255,255,.5);
-  border:0;
-  outline:0;
-  padding: .75rem;
-  border-radius: 2.5px;
-  color: #fff;
-  font-size: 1.5em;
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.bar {
+    width: 100%;
+    display: flex;
+}
+
+.bar .playing {
+    width: 300px;
+    margin-left: 1rem;
+    background: #ccc5b9;
+    border-radius: 2.5px;
+    padding: 0.5rem;
+}
+
+.bar .search {
+    width: 100%;
+}
+
+.bar .search input {
+    width: 100%;
+    background: #ccc5b9;
+    border: 0;
+    outline: 0;
+    padding: 0.75rem;
+    border-radius: 2.5px;
+    font-size: 1.5em;
 }
 
 .track {
-  display: flex;
-  margin-top: 1rem;
-  cursor: pointer;
+    display: flex;
+    margin-top: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
 }
 
 .track:hover {
-  background: rgba(255,255,255,.25)
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .track .image {
-  height: 75px;
-  width: 75px;
-  margin: auto 0;
+    height: 75px;
+    width: 75px;
+    margin: auto 0;
+}
+
+.track .image img {
+    border-radius: 10px;
 }
 
 .track .info {
-  width: 100%;
-  margin: auto 1rem;
+    width: 100%;
+    margin: auto 1rem;
 }
 
 .track .info > h3 {
-  margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
 }
 
 .track .add {
-  margin: auto 0;
+    margin: auto 1rem;
+    filter: invert(1);
+    background: url("/plus-solid.svg");
+    background-size: 100% 100%;
+    width: 30px;
+    height: 30px;
+}
+
+.track.queueing {
+    opacity: 0.75;
+}
+
+.track.queueing .add {
+    background: url("/circle-notch-solid.svg");
+    background-size: 100% 100%;
+    animation-name: spin;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.track.success {
+    opacity: 0.5;
+}
+
+.track.success .add {
+    background: url("/check-solid.svg");
+    background-size: 100% 100%;
+}
+
+.track.error .add {
+    background: url("/xmark-solid.svg");
+    background-size: 100% 100%;
 }
