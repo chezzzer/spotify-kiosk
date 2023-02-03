@@ -1,16 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'i.scdn.co',
-        port: '',
-        pathname: '/image/**',
-      },
-    ],
-  },
-}
+    reactStrictMode: false,
+    images: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "i.scdn.co",
+                port: "",
+                pathname: "/image/**",
+            },
+            {
+                protocol: "https",
+                hostname: "scannables.scdn.co",
+                port: "",
+                pathname: "/**",
+            },
+        ],
+    },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

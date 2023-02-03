@@ -2,10 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import spotify, { refreshToken } from "../../inc/spotify";
 
-export default async function handler(
-    req: NextApiRequest,
-    res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") return res.status(400).end("Method not allowed");
     if (!req.body.uri) return res.status(400).end("Track parameter not found.");
 
@@ -15,7 +12,7 @@ export default async function handler(
         await spotify.addToQueue(req.body.uri as string);
         res.status(200).end();
     } catch (e) {
-        console.error(e);
+        console.error("Error adding song.");
         res.status(500).end("Error adding song.");
     }
 }
