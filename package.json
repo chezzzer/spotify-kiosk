@@ -17,6 +17,7 @@
     "opn": "^6.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "sharp": "^0.31.3",
     "spotify-types": "^1.0.7",
     "spotify-web-api-node": "^5.0.2"
   },

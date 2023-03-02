@@ -11,6 +11,33 @@
     padding: 1rem;
 }
 
+.promptOuter {
+    display: flex;
+}
+
+.prompt {
+    display: flex;
+    padding: 5rem 0;
+    font-size: larger;
+    margin: 0 auto;
+}
+
+.prompt h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.prompt h4 {
+    font-size: 2rem;
+    font-weight: normal;
+}
+
+.prompt img {
+    filter: invert(1);
+    margin-right: 5rem;
+}
+
 .bar {
     color: var(--background);
     width: 100%;
@@ -136,8 +163,7 @@
 }
 
 .track.success {
-    background: rgba(255, 255, 255, 0.25);
-    opacity: 0.5;
+    background: #1db954;
 }
 
 .track.success .add {
