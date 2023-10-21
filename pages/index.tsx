@@ -192,7 +192,7 @@ export default function Home() {
                 <div style={{ opacity: 0.75, marginBottom: 5 }}>UP NEXT</div>
                 <div className={styles.bar}>
                     {queue.map((track, i) => (
-                        <div className={styles.song}>
+                        <div className={styles.song} key={i}>
                             <div className={styles.info}>
                                 <div className={styles.image}>
                                     <Image
