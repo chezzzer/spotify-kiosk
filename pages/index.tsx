@@ -6,7 +6,8 @@ import { Track } from "spotify-types";
 
 export default function Home() {
     const [results, setResults] = useState([] as Track[]);
-    const [state, setState] = useState({} as Track);
+    const [state, setState] = useState<Track>();
+    const [queue, setQueue] = useState<Track[]>([]);
 
     const controller = new AbortController();
     const signal = controller.signal;
@@ -87,11 +88,14 @@ export default function Home() {
 
     useEffect(() => {
         async function getState() {
-            fetch("/api/state").then(async (res) => {
+            fetch("/api/queue").then(async (res) => {
                 const state = await res.json();
 
-                if (!state.item) return setState({} as Track);
-                setState(state.item);
+                if (!state.currently_playing) return setState({} as Track);
+                setState(state.currently_playing);
+
+                const sample = state.queue.slice(0, 3);
+                setQueue(sample);
             });
         }
 
@@ -150,10 +154,10 @@ export default function Home() {
                             )}
                         </div>
                     </form>
-                    <div className={styles.playing}>
+                    <div className={styles.song}>
                         <div className={styles.info}>
-                            {!state.name && <h3>Nothing Playing</h3>}
-                            {state.name && (
+                            {!state && <h3>Loading...</h3>}
+                            {state && (
                                 <>
                                     <div className={styles.image}>
                                         <Image
@@ -176,7 +180,7 @@ export default function Home() {
                         </div>
                     </div>
                     <div className={styles.scan}>
-                        {state.name && (
+                        {state && (
                             // eslint-disable-next-line @next/next/no-img-element
                             <img
                                 src={`https://scannables.scdn.co/uri/plain/jpeg/ffffff/black/256/${state.uri}`}
@@ -184,6 +188,33 @@ export default function Home() {
                             />
                         )}
                     </div>
+                </div>
+                <div style={{ opacity: 0.75, marginBottom: 5 }}>UP NEXT</div>
+                <div className={styles.bar}>
+                    {queue.map((track, i) => (
+                        <div className={styles.song}>
+                            <div className={styles.info}>
+                                <div className={styles.image}>
+                                    <Image
+                                        alt={track.name}
+                                        width={50}
+                                        height={50}
+                                        src={track.album.images[1].url}
+                                    />
+                                </div>
+                                <div className={styles.meta}>
+                                    <h4>
+                                        {i + 1}. {track.name}
+                                    </h4>
+                                    <span>
+                                        {track.artists
+                                            .map((a) => a.name)
+                                            .join(", ")}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
                 {!results.length && (
                     <div className={styles.promptOuter}>

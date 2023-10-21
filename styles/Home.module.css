@@ -42,33 +42,35 @@
     color: var(--background);
     width: 100%;
     display: flex;
+    margin-bottom: 1rem;
+    gap: 1rem;
 }
 
-.bar .playing {
-    width: 500px;
-    margin: 0 1rem;
+.song {
+    color: #000 !important;
     background: var(--light);
+    width: 100%;
     border-radius: 2.5px;
     display: grid;
     padding: 0.5rem;
 }
 
-.bar .playing .info {
+.song .info {
     margin: auto 0;
     display: flex;
 }
 
-.playing .info .image {
+.song .info .image {
     width: 50px;
     height: 50px;
     margin: auto 0;
 }
 
-.playing .info .image img {
+.song .info .image img {
     border-radius: 10px;
 }
 
-.playing .info .meta {
+.song .info .meta {
     margin: auto 0.75rem;
 }
 
