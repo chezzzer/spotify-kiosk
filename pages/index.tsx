@@ -189,48 +189,53 @@ export default function Home() {
                         )}
                     </div>
                 </div>
-                <div style={{ opacity: 0.75, marginBottom: 5 }}>UP NEXT</div>
-                <div className={styles.bar}>
-                    {queue.map((track, i) => (
-                        <div className={styles.song} key={i}>
-                            <div className={styles.info}>
-                                <div className={styles.image}>
-                                    <Image
-                                        alt={track.name}
-                                        width={50}
-                                        height={50}
-                                        src={track.album.images[1].url}
-                                    />
-                                </div>
-                                <div className={styles.meta}>
-                                    <h4>
-                                        {i + 1}. {track.name}
-                                    </h4>
-                                    <span>
-                                        {track.artists
-                                            .map((a) => a.name)
-                                            .join(", ")}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+
                 {!results.length && (
-                    <div className={styles.promptOuter}>
-                        <div className={styles.prompt}>
-                            <Image
-                                alt="music note"
-                                src="/music-solid.svg"
-                                width={150}
-                                height={150}
-                            />
-                            <div>
-                                <h1>Music Jukebox</h1>
-                                <h4>Play any song here.</h4>
+                    <>
+                        <div style={{ opacity: 0.75, marginBottom: 5 }}>
+                            UP NEXT
+                        </div>
+                        <div className={styles.bar}>
+                            {queue.map((track, i) => (
+                                <div className={styles.song} key={i}>
+                                    <div className={styles.info}>
+                                        <div className={styles.image}>
+                                            <Image
+                                                alt={track.name}
+                                                width={50}
+                                                height={50}
+                                                src={track.album.images[1].url}
+                                            />
+                                        </div>
+                                        <div className={styles.meta}>
+                                            <h4>
+                                                {i + 1}. {track.name}
+                                            </h4>
+                                            <span>
+                                                {track.artists
+                                                    .map((a) => a.name)
+                                                    .join(", ")}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className={styles.promptOuter}>
+                            <div className={styles.prompt}>
+                                <Image
+                                    alt="music note"
+                                    src="/music-solid.svg"
+                                    width={150}
+                                    height={150}
+                                />
+                                <div>
+                                    <h1>Music Jukebox</h1>
+                                    <h4>Play any song here.</h4>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </>
                 )}
                 <div className={styles.results}>
                     {results.map((result: Track) => {
